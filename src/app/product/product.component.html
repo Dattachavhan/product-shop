@@ -1,0 +1,40 @@
+<div class="mrTB-8">
+  <ng-container *ngFor="let product of paginationProductList; let i = index">
+    <div class="card">
+      <div
+        fxLayout="row"
+        fxlayoutAlign="space-around center"
+        fxLayout.lt-sm="column"
+        fxLayoutGap="60px"
+      >
+        <div class="product-image">
+          <img class="img" [src]="product.image" alt="Product Image" />
+        </div>
+        <div
+          fxLayout="column"
+          fxLayoutAlign="space-around start"
+          class="product-details"
+        >
+          <div class="product-title">{{ product.title }}</div>
+          <div class="product-price">
+            <span class="a-price-symbol">₹</span>&nbsp;{{ product.price }}
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div
+        fxLayout="row"
+        fxLayoutAlign="space-between center"
+        fxLayout.lt-sm="column"
+        fxLayoutGap="10px"
+      >
+        <div>
+          {{ product.description }}
+        </div>
+        <div>
+          <button class="button">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

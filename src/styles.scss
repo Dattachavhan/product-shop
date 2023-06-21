@@ -1,0 +1,28 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+  background: #80808059;
+}
+
+@media (min-width: 768px) {
+  body {
+    margin: 0 180px;
+  }
+}
+
+
+.mrTB-8 {
+  margin: 8px 0px;
+}
+.button {
+  padding: 8px 16px;
+  background-color: #d1305e;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 120px;
+}
+
+.button:hover {
+  background-color: #820f30;
+}

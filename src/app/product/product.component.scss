@@ -1,0 +1,36 @@
+
+.card {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  padding: 16px;
+  border: 1px solid 80808091;
+  margin-bottom: 8px;
+}
+
+.product-image {
+  margin-right: 16px;
+  .img {
+    height: 150px;
+    width: 150px;
+  }
+}
+
+.product-details {
+  display: flex;
+  flex-direction: column;
+  margin-right: 16px;
+}
+
+.product-title {
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.product-price {
+  font-size: 30px;
+  color: black;
+}
+.product-description{
+  min-height: 10vh;
+}
