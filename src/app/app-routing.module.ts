@@ -8,11 +8,13 @@ const routes: Routes = [
     path: 'product',
     component: ProductComponent,
     title: 'Shopping | Product',
+    data: { page: 'product' },
   },
   {
     path: 'cart',
     component: CartComponent,
     title: 'Shopping | Cart',
+    data: { page: 'cart' },
   },
   {
     path: '',

@@ -1,1 +1,71 @@
-<p>cart works!</p>
+<div class="mrTB-8 product-wrapper">
+  <ng-container *ngIf="cartProductList.length > 0; else emptyCart">
+    <ng-container *ngFor="let product of cartProductList; let i = index">
+      <div class="card">
+        <div
+          fxLayout="row"
+          fxlayoutAlign="space-around center"
+          fxLayout.lt-sm="column"
+          fxLayoutGap="60px"
+        >
+          <div class="product-image">
+            <img class="img" [src]="product.image" alt="Product Image" />
+          </div>
+          <div
+            fxLayout="column"
+            fxLayoutAlign="space-around start"
+            class="product-details"
+          >
+            <div class="product-title">{{ product.title }}</div>
+            <div class="product-price">
+              <span class="a-price-symbol">₹</span>&nbsp;{{ product.price }}
+            </div>
+          </div>
+        </div>
+        <hr />
+        <div
+          fxLayout="row"
+          fxLayoutAlign="space-between center"
+          fxLayout.lt-sm="column"
+          fxLayoutGap="10px"
+        >
+          <div>
+            <button class="button" (click)="removeFromCart(product)">
+              Remove Item
+            </button>
+          </div>
+          <div
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+            fxLayout.lt-sm="column"
+            fxLayoutGap="10px"
+          >
+            <button
+              class="button cart-quantity-btn"
+              (click)="decreaseProductCount(product)"
+            >
+              -
+            </button>
+            <span class="cart-product-value">{{ product.count }}</span>
+            <button
+              class="button cart-quantity-btn"
+              (click)="increaseProductCount(product)"
+            >
+              +
+            </button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+  <ng-template #emptyCart>
+    <div class="empty-cart">
+      <h3>Your Cart is Empty</h3>
+      <p>Start adding products to your cart to see them here!</p>
+      <button class="button" routerLink="/product">Add Products</button>
+    </div>
+  </ng-template>
+  <div class="total-price" *ngIf="cartProductList.length > 0">
+    Total Price:&nbsp;<span>₹</span>&nbsp;{{ calculateTotalPrice() | number:'1.2-2' }}
+  </div>
+</div>

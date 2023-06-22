@@ -8,6 +8,8 @@ import { CartComponent } from './cart/cart.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LoaderComponent } from './loader/loader.component';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -15,15 +17,21 @@ import { LoaderComponent } from './loader/loader.component';
     ProductComponent,
     CartComponent,
     NavbarComponent,
-    LoaderComponent
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FlexLayoutModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

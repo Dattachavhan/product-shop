@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 body {
-  background: #80808059;
+  background: #80808026;
 }
 
 @media (min-width: 768px) {
@@ -9,6 +9,43 @@ body {
   }
 }
 
+.product-wrapper {
+  .card {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    padding: 16px;
+    border: 1px solid 80808091;
+    margin-bottom: 8px;
+  }
+
+  .product-image {
+    margin-right: 16px;
+    .img {
+      height: 150px;
+      width: 150px;
+    }
+  }
+
+  .product-details {
+    display: flex;
+    flex-direction: column;
+    margin-right: 16px;
+  }
+
+  .product-title {
+    font-size: 36px;
+    font-weight: bold;
+  }
+
+  .product-price {
+    font-size: 30px;
+    color: black;
+  }
+  .product-description {
+    min-height: 10vh;
+  }
+}
 
 .mrTB-8 {
   margin: 8px 0px;
@@ -25,4 +62,12 @@ body {
 
 .button:hover {
   background-color: #820f30;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.toast-success {
+  background-color: #d1305e !important;
 }

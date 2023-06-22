@@ -1,5 +1,5 @@
-<div class="mrTB-8">
-  <ng-container *ngFor="let product of paginationProductList; let i = index">
+<div class="mrTB-8 product-wrapper" #productListContainer>
+  <ng-container *ngFor="let product of currentProductList; let i = index">
     <div class="card">
       <div
         fxLayout="row"
@@ -17,7 +17,7 @@
         >
           <div class="product-title">{{ product.title }}</div>
           <div class="product-price">
-            <span class="a-price-symbol">₹</span>&nbsp;{{ product.price }}
+            <span>₹</span>&nbsp;{{ product.price }}
           </div>
         </div>
       </div>
@@ -32,9 +32,28 @@
           {{ product.description }}
         </div>
         <div>
-          <button class="button">Add to Cart</button>
+          <button class="button" (click)="addToCart(product)">Add to Cart</button>
         </div>
       </div>
     </div>
   </ng-container>
+  <div fxLayout="row" fxLayoutAlign="space-between center" class="pagination">
+    <button
+      class="button"
+      [disabled]="currentPage === 1"
+      (click)="previousPage()"
+    >
+      Previous
+    </button>
+    <div class="current-page">
+      <span>{{ currentPage }} / {{ totalPageCount }}</span>
+    </div>
+    <button
+      class="button"
+      [disabled]="currentPage === totalPageCount"
+      (click)="nextPage()"
+    >
+      Next
+    </button>
+  </div>
 </div>

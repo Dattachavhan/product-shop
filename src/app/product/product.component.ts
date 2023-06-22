@@ -1,7 +1,8 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { IProduct } from '../models/product';
 import { AppService } from '../services/app.service';
 import { LoaderService } from '../services/loader.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product',
@@ -9,50 +10,72 @@ import { LoaderService } from '../services/loader.service';
   styleUrls: ['./product.component.scss'],
 })
 export class ProductComponent implements OnInit {
-  paginationProductList: IProduct[] = [];
+  currentProductList: IProduct[] = [];
   allProductList: IProduct[] = [];
-  pageNumber = 1;
+  @ViewChild('productListContainer') productListContainer!: ElementRef;
+  pageSize = 5;
+  currentPage = 1;
+  totalPageCount = 0;
 
   constructor(
     private appService: AppService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
     this.getProductList();
   }
 
-  @HostListener('window:scroll', ['$event'])
-  onWindowScroll() {
-    const windowHeight = 'innerHeight' in window ? window.innerHeight : document.documentElement.offsetHeight;
-    const body = document.body, html = document.documentElement;
-    const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
-    const windowBottom = windowHeight + window.pageYOffset;
-    console.log('windowBottom',windowBottom, docHeight)
-    if (windowBottom >= docHeight - 5) {
-      this.pageNumber = this.pageNumber + 1;
-      this.getNextProductList();
-    }
-  }
-
-  private getNextProductList () : void{
-    this.loaderService.showLoader();
-    setTimeout(() => {
-      const endIndex = this.pageNumber * 5  - 1;
-      const startIndex = endIndex - 5;
-      console.log(startIndex, endIndex, this.pageNumber);
-      this.paginationProductList = this.paginationProductList.concat(this.allProductList.slice(startIndex, endIndex));
-      this.loaderService.hideLoader();
-    },5000)
-   
+  public addToCart(product : IProduct) : void{
+    this.appService.addToCart(product);
+    this.toastr.success('Product added successfully to the cart!');
   }
 
   private getProductList(): void {
     this.loaderService.showLoader();
-    this.appService.getProducts().subscribe((res: IProduct[]) => {
-      this.allProductList = res || [];
-      this.paginationProductList = this.allProductList.slice(0, 5)
+    this.appService.getProducts().subscribe(
+      (res: IProduct[]) => {
+        this.allProductList = res || [];
+        this.totalPageCount = Math.ceil(
+          this.allProductList.length / this.pageSize
+        );
+        this.setCurrentProducts();
+        this.loaderService.hideLoader();
+      },
+      (err: any) => {
+        this.loaderService.hideLoader();
+      }
+    );
+  }
+
+  previousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.setCurrentProducts();
+      this.scrollToTop();
+    }
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPageCount) {
+      this.currentPage++;
+      this.setCurrentProducts();
+      this.scrollToTop();
+    }
+  }
+
+  setCurrentProducts() {
+    this.loaderService.showLoader();
+    setTimeout(() => {
+      const startIndex = (this.currentPage - 1) * this.pageSize;
+      const endIndex = startIndex + this.pageSize;
+      this.currentProductList = this.allProductList.slice(startIndex, endIndex);
       this.loaderService.hideLoader();
-    });
+    },500);
+  }
+
+  scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }
