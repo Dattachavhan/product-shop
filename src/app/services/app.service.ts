@@ -18,17 +18,20 @@ export class AppService {
   }
 
   addToCart(product: IProduct) {
-    const existingProduct = this.cartProductList.find(
+    const existingProductIndex = this.cartProductList.findIndex(
       (cartProduct) => cartProduct.id === product.id
     );
-    if (existingProduct && existingProduct.count && product && product.count) {
-      existingProduct.count = product.count + 1;
+    if (existingProductIndex > -1) {
+      const existingProduct = this.cartProductList[existingProductIndex];
+      if (existingProduct && existingProduct.count) {
+        existingProduct.count++;
+      }
     } else {
-      product.count = 1;
-      this.cartProductList.push(product);
+      const newProduct = { ...product, count: 1 };
+      this.cartProductList.push(newProduct);
     }
   }
-
+  
   decreaseProductCount(product: IProduct) {
     const existingProduct = this.cartProductList.find(
       (cartProduct) => cartProduct.id === product.id
