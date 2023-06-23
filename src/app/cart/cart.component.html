@@ -66,6 +66,8 @@
     </div>
   </ng-template>
   <div class="total-price" *ngIf="cartProductList.length > 0">
-    Total Price:&nbsp;<span>₹</span>&nbsp;{{ calculateTotalPrice() | number:'1.2-2' }}
+    Total Price:&nbsp;<span>₹</span>&nbsp;{{
+      calculateTotalPrice() | number : "1.2-2"
+    }}
   </div>
 </div>

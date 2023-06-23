@@ -52,7 +52,10 @@ export class AppService {
   }
 
   calculateTotalPrice(): number {
-    return this.cartProductList.reduce((total, item) => total + (item.price * ((item || {}).count || 1)), 0);
+    return this.cartProductList.reduce(
+      (total, item) => total + item.price * ((item || {}).count || 1),
+      0
+    );
   }
 
   getCartProducts() {

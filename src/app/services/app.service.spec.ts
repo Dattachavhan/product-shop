@@ -37,11 +37,6 @@ describe('AppService', () => {
     expect(service.getCartProducts()).toEqual([]);
   });
 
-  // it('should decrease product count when count is greater than 1', () => {
-  //   service.decreaseProductCount(product);
-  //   expect(service.getCartProducts()).toEqual([]);
-  // });
-
   it('should remove product when count is 1', () => {
     service.decreaseProductCount(product);
     expect(service.getCartProducts()).toEqual([]);

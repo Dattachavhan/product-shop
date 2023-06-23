@@ -1,4 +1,9 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { IProduct } from '../models/product';
 import { AppService } from '../services/app.service';
 import { LoaderService } from '../services/loader.service';
@@ -27,7 +32,7 @@ export class ProductComponent implements OnInit {
     this.getProductList();
   }
 
-  public addToCart(product : IProduct) : void{
+  public addToCart(product: IProduct): void {
     this.appService.addToCart(product);
     this.toastr.success('Product added successfully to the cart!');
   }
@@ -72,7 +77,7 @@ export class ProductComponent implements OnInit {
       const endIndex = startIndex + this.pageSize;
       this.currentProductList = this.allProductList.slice(startIndex, endIndex);
       this.loaderService.hideLoader();
-    },500);
+    }, 500);
   }
 
   scrollToTop() {

@@ -1,5 +1,9 @@
 <nav class="navbar">
-    <div class="site-name" routerLink="/product">ProductShop</div>
-    <button *ngIf="currentPage === 'product'" class="button" routerLink="/cart">Go to Cart</button>
-    <button *ngIf="currentPage === 'cart'" class="button" routerLink="/product">Go to Product</button>
+  <div class="site-name" routerLink="/product">ProductShop</div>
+  <button *ngIf="currentPage === 'product'" class="button" routerLink="/cart">
+    Go to Cart
+  </button>
+  <button *ngIf="currentPage === 'cart'" class="button" routerLink="/product">
+    Go to Product
+  </button>
 </nav>
