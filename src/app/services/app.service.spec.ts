@@ -13,7 +13,7 @@ describe('AppService', () => {
     description: 'description',
     category: 'cloth',
     image: '/assests/one.png',
-    count: 5,
+    count: 1,
   };
 
   beforeEach(() => {
